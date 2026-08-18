@@ -403,6 +403,65 @@ function animateCount(el) {
 // ---------- Ano no footer ----------
 document.getElementById("ano").textContent = new Date().getFullYear();
 
+// ---------- Toast helper ----------
+let toastTimeout;
+function showToast(message, duration = 2400) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = message;
+  t.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), duration);
+}
+
+// ---------- Email: copia para clipboard + toast ----------
+// Mantém href=mailto: como fallback semântico, mas o clique aqui SEMPRE copia
+// para o clipboard — resolve o caso em que o navegador/OS não tem cliente
+// de email padrão configurado e o mailto: parece "não fazer nada".
+const emailLink = document.getElementById('emailLink');
+if (emailLink) {
+  emailLink.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const email = emailLink.dataset.email;
+    const label = document.getElementById('emailLabel');
+    const original = label ? label.textContent : 'Email';
+
+    const fallbackCopy = () => {
+      const ta = document.createElement('textarea');
+      ta.value = email;
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch {}
+      document.body.removeChild(ta);
+      return ok;
+    };
+
+    let copied = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+        copied = true;
+      } else {
+        copied = fallbackCopy();
+      }
+    } catch { copied = fallbackCopy(); }
+
+    const msg = currentLang === 'pt'
+      ? (copied ? `Email copiado: ${email}` : `Meu email: ${email}`)
+      : (copied ? `Email copied: ${email}` : `My email: ${email}`);
+
+    showToast(msg);
+
+    if (label && copied) {
+      label.textContent = currentLang === 'pt' ? 'Copiado ✓' : 'Copied ✓';
+      setTimeout(() => { label.textContent = original; }, 1800);
+    }
+  });
+}
+
 // ---------- Marquee de stack com logos ----------
 // Usa iconify.design — cobertura muito maior que simple-icons (que removeu AWS, Azure, OpenAI por
 // motivos de trademark). Para os monocromáticos (set simple-icons:), passamos ?color= para forçar
