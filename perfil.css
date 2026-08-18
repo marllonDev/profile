@@ -404,6 +404,240 @@ body {
   border-color: var(--accent);
 }
 
+/* ---------- Timeline (Experiência) ---------- */
+.timeline { margin-top: 28px; position: relative; padding-left: 22px; border-left: 2px solid var(--line); display: grid; gap: 24px; }
+
+.timeline-item {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 26px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.timeline-item:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 6px 24px rgba(42,120,214,0.10); }
+
+.timeline-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.tl-role { font-size: 17px; font-weight: 700; color: var(--text); }
+.tl-company { font-size: 14px; color: var(--accent); font-weight: 600; margin-top: 2px; }
+.tl-remote { color: var(--text-2); font-weight: 400; }
+.tl-period {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  white-space: nowrap;
+}
+
+.tl-list { list-style: none; display: grid; gap: 8px; padding: 0; margin: 0; }
+.tl-list li { font-size: 14px; color: var(--text-2); line-height: 1.55; padding-left: 16px; position: relative; }
+.tl-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.tl-list li strong { color: var(--text); }
+
+/* ---------- Educação ---------- */
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.edu-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+.edu-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+}
+.edu-inst { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.edu-course { color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+.edu-meta { font-size: 13px; color: var(--text-2); margin-bottom: 10px; }
+.edu-meta strong { color: var(--text); }
+.edu-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+/* ---------- Certificações ---------- */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.cert {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.cert:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+.cert-year {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--chip-bg);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.cert h4 { font-size: 13px; font-weight: 700; line-height: 1.35; margin-bottom: 4px; color: var(--text); }
+.cert p { font-size: 12px; color: var(--text-2); }
+
+/* ---------- Awards ---------- */
+.awards { display: grid; gap: 14px; margin-top: 20px; }
+
+.award {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.award:hover { transform: translateY(-2px); border-color: var(--accent-2); }
+
+.award-icon {
+  font-size: 32px;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--chip-bg);
+  flex-shrink: 0;
+}
+.award h3 { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+.award p { font-size: 13px; color: var(--text-2); }
+
+/* ---------- Two column layout (Vol + Asp) ---------- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+
+.vol-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 12px;
+}
+.vol-icon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--chip-bg);
+  flex-shrink: 0;
+}
+.vol-card h3 { font-size: 16px; margin-bottom: 3px; }
+.vol-role { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+.vol-desc { font-size: 13px; color: var(--text-2); }
+
+.asp-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+.asp-list li {
+  padding: 12px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--text);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.asp-list li:hover { transform: translateX(4px); border-color: var(--accent); }
+
+/* ---------- Hobbies ---------- */
+.hob-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.hob {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.hob:hover { transform: translateY(-3px); border-color: var(--accent); }
+.hob-emoji { font-size: 40px; margin-bottom: 10px; }
+.hob h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.hob p { font-size: 13px; color: var(--text-2); margin-bottom: 12px; }
+
+.hob-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.hob-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--accent);
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
