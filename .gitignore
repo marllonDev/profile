@@ -1,0 +1,8 @@
+# Claude Code
+.claude/
+
+# Codebase Memory MCP
+.codebase-memory/
+
+# macOS
+.DS_Store
