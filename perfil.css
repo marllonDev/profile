@@ -305,25 +305,28 @@ body {
   to   { transform: translateX(-50%); }
 }
 
+/* Fundo claro fixo (mesmo em dark) para garantir contraste dos logos —
+   marcas com detalhes pretos (Claude, GitHub, Kafka, etc.) somem em fundo escuro. */
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
   border-radius: 14px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  color: var(--text);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #1f2430;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
-  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, background 0.25s;
 }
 
 .brand:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
-  box-shadow: 0 10px 24px rgba(42, 120, 214, 0.16);
+  box-shadow: 0 10px 24px rgba(42, 120, 214, 0.22);
+  background: #f7fafc;
 }
 
 .brand img {
@@ -332,12 +335,6 @@ body {
   display: block;
   object-fit: contain;
 }
-
-/* No dark mode, alguns logos brancos ficam invisíveis — reforça contraste do card */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .brand { background: #23231f; }
-}
-:root[data-theme="dark"] .brand { background: #23231f; }
 
 /* ---------- Projetos ---------- */
 .repos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
