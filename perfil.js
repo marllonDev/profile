@@ -404,55 +404,58 @@ function animateCount(el) {
 document.getElementById("ano").textContent = new Date().getFullYear();
 
 // ---------- Marquee de stack com logos ----------
-// Usa simple-icons CDN — logos oficiais coloridos com a cor de cada marca.
-// slug: identificador do simple-icons (https://simpleicons.org/)
-// name: nome exibido | color: hex sem "#" (opcional; padrão = cor da marca)
+// Usa iconify.design — cobertura muito maior que simple-icons (que removeu AWS, Azure, OpenAI por
+// motivos de trademark). Para os monocromáticos (set simple-icons:), passamos ?color= para forçar
+// a cor da marca e garantir contraste em light/dark. Sets: logos:* (colorido) | simple-icons:*
+// (mono, precisa color) | devicon:* (fallback específico).
 const BRANDS = [
-  { slug: 'python',          name: 'Python' },
-  { slug: 'openjdk',         name: 'Java' },
-  { slug: 'mysql',           name: 'SQL' },
-  { slug: 'apachespark',     name: 'PySpark' },
-  { slug: 'databricks',      name: 'Databricks' },
-  { slug: 'databricks',      name: 'Delta Lake', color: 'c4263a' },
-  { slug: 'apacheairflow',   name: 'Airflow' },
-  { slug: 'apachekafka',     name: 'Kafka' },
-  { slug: 'confluent',       name: 'Confluent Cloud' },
-  { slug: 'amazonwebservices', name: 'AWS', color: 'ff9900' },
-  { slug: 'microsoftazure',  name: 'Azure' },
-  { slug: 'microsoftazure',  name: 'Data Factory', color: '0072C6' },
-  { slug: 'microsoftazure',  name: 'MS Fabric', color: '742774' },
-  { slug: 'azuredevops',     name: 'Azure DevOps' },
-  { slug: 'amazonwebservices', name: 'AWS Glue', color: 'ff9900' },
-  { slug: 'terraform',       name: 'Terraform' },
-  { slug: 'docker',          name: 'Docker' },
-  { slug: 'elasticsearch',   name: 'ElasticSearch' },
-  { slug: 'datadog',         name: 'Datadog' },
-  { slug: 'newrelic',        name: 'New Relic' },
-  { slug: 'react',           name: 'React' },
-  { slug: 'fastapi',         name: 'FastAPI' },
-  { slug: 'anthropic',       name: 'Claude Code' },
-  { slug: 'openrouter',      name: 'OpenRouter' },
-  { slug: 'modelcontextprotocol', name: 'MCP' },
-  { slug: 'deepseek',        name: 'DeepSeek' },
-  { slug: 'openai',          name: 'OpenAI' },
-  { slug: 'googlegemini',    name: 'Gemini AI' },
-  { slug: 'javascript',      name: 'JavaScript' },
-  { slug: 'git',             name: 'Git' },
-  { slug: 'github',          name: 'GitHub' },
-  { slug: 'flutter',         name: 'Flutter' },
-  { slug: 'dart',            name: 'Dart' },
-  { slug: 'angular',         name: 'Angular' },
-  { slug: 'go',              name: 'Go' },
-  { slug: 'n8n',             name: 'n8n' },
+  { icon: 'logos:python',            name: 'Python' },
+  { icon: 'logos:java',              name: 'Java' },
+  { icon: 'logos:mysql',             name: 'SQL' },
+  { icon: 'logos:apache-spark',      name: 'PySpark' },
+  { icon: 'simple-icons:databricks', name: 'Databricks', color: 'ff3621' },
+  { icon: 'logos:airflow-icon',      name: 'Airflow' },
+  { icon: 'logos:kafka-icon',        name: 'Kafka' },
+  { icon: 'logos:kafka-icon',        name: 'Confluent Cloud' },
+  { icon: 'logos:aws',               name: 'AWS' },
+  { icon: 'logos:microsoft-azure',   name: 'Azure' },
+  { icon: 'logos:microsoft-azure',   name: 'Data Factory' },
+  { icon: 'logos:microsoft-azure',   name: 'MS Fabric' },
+  { icon: 'simple-icons:azuredevops', name: 'Azure DevOps', color: '0078d4' },
+  { icon: 'logos:aws-glue',          name: 'AWS Glue' },
+  { icon: 'logos:terraform',         name: 'Terraform' },
+  { icon: 'logos:docker',            name: 'Docker' },
+  { icon: 'logos:elasticsearch',     name: 'ElasticSearch' },
+  { icon: 'logos:datadog',           name: 'Datadog' },
+  { icon: 'logos:new-relic',         name: 'New Relic' },
+  { icon: 'logos:react',             name: 'React' },
+  { icon: 'logos:fastapi',           name: 'FastAPI' },
+  { icon: 'logos:claude',            name: 'Claude Code' },
+  { icon: 'simple-icons:openrouter', name: 'OpenRouter', color: '6d28d9' },
+  { icon: 'logos:model-context-protocol', name: 'MCP' },
+  { icon: 'logos:deepseek',          name: 'DeepSeek' },
+  { icon: 'logos:openai',            name: 'OpenAI' },
+  { icon: 'logos:google-gemini',     name: 'Gemini AI' },
+  { icon: 'logos:javascript',        name: 'JavaScript' },
+  { icon: 'logos:git',               name: 'Git' },
+  { icon: 'logos:github',            name: 'GitHub' },
+  { icon: 'logos:flutter',           name: 'Flutter' },
+  { icon: 'logos:dart',              name: 'Dart' },
+  { icon: 'logos:angular',           name: 'Angular' },
+  { icon: 'logos:go',                name: 'Go' },
+  { icon: 'simple-icons:n8n',        name: 'n8n', color: 'ea4b71' },
 ];
 
 function renderMarquee() {
   const track = document.getElementById('marqueeTrack');
   if (!track) return;
 
-  const iconUrl = (b) => b.color
-    ? `https://cdn.simpleicons.org/${b.slug}/${b.color}`
-    : `https://cdn.simpleicons.org/${b.slug}`;
+  const iconUrl = (b) => {
+    const path = b.icon.replace(':', '/');
+    return b.color
+      ? `https://api.iconify.design/${path}.svg?color=%23${b.color}`
+      : `https://api.iconify.design/${path}.svg`;
+  };
 
   const buildItem = (b) => {
     const el = document.createElement('span');
