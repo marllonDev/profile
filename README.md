@@ -60,5 +60,3 @@ E mais... veja a seção de projetos no portfólio!
 Aberto para inspiração e compartilhamento.
 
 ---
-
-**Feito com Claude Code** 🤖
