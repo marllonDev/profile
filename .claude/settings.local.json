@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ide__getDiagnostics",
+      "Bash(command -v omnirouter)",
+      "Read(//usr/local/bin/**)",
+      "Bash(python3 -m json.tool)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import sys,json; [print\\(json.dumps\\(json.loads\\(l\\),ensure_ascii=False\\)[:300]\\) for l in sys.stdin if l.strip\\(\\)]\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/marllon.zucolotto/.claude.json'\\)\\); print\\('root mcpServers:', json.dumps\\(d.get\\('mcpServers'\\), indent=2\\)[:1500]\\)\")",
+      "Bash(claude mcp *)",
+      "Bash(env -u CLAUDE_CONFIG_DIR claude mcp list)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(python3 *)",
+      "Bash(env -u CLAUDE_CONFIG_DIR claude mcp add --help)",
+      "Bash(grep -nE ',\\\\s*$' /Users/marllon.zucolotto/.claude/profiles/deepseek-deepseek-v4-pro/.claude.json)",
+      "Bash(export CLAUDE_CONFIG_DIR=\"$PROFILE_DIR\")",
+      "Bash(echo \"=== add github \\(user scope\\) ===\")",
+      "Bash(echo \"=== add codebase-memory-mcp \\(user scope\\) ===\")",
+      "Bash(echo \"=== verify: mcp list in profile context ===\")",
+      "Bash(export CLAUDE_CONFIG_DIR=\"$HOME/.claude/profiles/aug-sonnet5-high\")",
+      "mcp__codebase-memory-mcp__list_projects",
+      "mcp__codebase-memory-mcp__search_graph",
+      "mcp__codebase-memory-mcp__get_code_snippet",
+      "Bash(curl -s https://openrouter.ai/api/v1/models)",
+      "Bash(node scripts/validate_palette.js \"#2a78d6,#eb6834,#1baf7a,#eda100,#e87ba4,#008300,#4a3aa7,#e34948\" --mode light)",
+      "Bash(node scripts/validate_palette.js \"#3987e5,#d95926,#199e70,#c98500,#d55181,#008300,#9085e9,#e66767\" --mode dark)",
+      "mcp__github__search_repositories",
+      "WebSearch",
+      "mcp__github__get_file_contents",
+      "Bash(curl -s \"https://api.github.com/repos/marllonDev/template-dab\")",
+      "Bash(curl -s \"https://api.github.com/repos/marllonDev/template-dab/languages\")",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/marllonDev/profilev1/master/assets/img/profile02.jpg\" -o assets/profile02.jpg)",
+      "WebFetch(domain:www.linkedin.com)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/126.0 Safari/537.36\" -o /tmp/li_photo.jpg -w \"%{http_code} %{size_download}\\\\n\" \"https://www.linkedin.com/in/marllonzuc/profilephoto-800x800.jpg\")",
+      "mcp__codebase-memory-mcp__search_code",
+      "mcp__codebase-memory-mcp__get_architecture"
+    ]
+  }
+}
