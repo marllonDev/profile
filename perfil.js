@@ -402,3 +402,68 @@ function animateCount(el) {
 
 // ---------- Ano no footer ----------
 document.getElementById("ano").textContent = new Date().getFullYear();
+
+// ---------- Marquee de stack com logos ----------
+// Usa simple-icons CDN — logos oficiais coloridos com a cor de cada marca.
+// slug: identificador do simple-icons (https://simpleicons.org/)
+// name: nome exibido | color: hex sem "#" (opcional; padrão = cor da marca)
+const BRANDS = [
+  { slug: 'python',          name: 'Python' },
+  { slug: 'openjdk',         name: 'Java' },
+  { slug: 'mysql',           name: 'SQL' },
+  { slug: 'apachespark',     name: 'PySpark' },
+  { slug: 'databricks',      name: 'Databricks' },
+  { slug: 'databricks',      name: 'Delta Lake', color: 'c4263a' },
+  { slug: 'apacheairflow',   name: 'Airflow' },
+  { slug: 'apachekafka',     name: 'Kafka' },
+  { slug: 'confluent',       name: 'Confluent Cloud' },
+  { slug: 'amazonwebservices', name: 'AWS', color: 'ff9900' },
+  { slug: 'microsoftazure',  name: 'Azure' },
+  { slug: 'microsoftazure',  name: 'Data Factory', color: '0072C6' },
+  { slug: 'microsoftazure',  name: 'MS Fabric', color: '742774' },
+  { slug: 'azuredevops',     name: 'Azure DevOps' },
+  { slug: 'amazonwebservices', name: 'AWS Glue', color: 'ff9900' },
+  { slug: 'terraform',       name: 'Terraform' },
+  { slug: 'docker',          name: 'Docker' },
+  { slug: 'elasticsearch',   name: 'ElasticSearch' },
+  { slug: 'datadog',         name: 'Datadog' },
+  { slug: 'newrelic',        name: 'New Relic' },
+  { slug: 'react',           name: 'React' },
+  { slug: 'fastapi',         name: 'FastAPI' },
+  { slug: 'anthropic',       name: 'Claude Code' },
+  { slug: 'openrouter',      name: 'OpenRouter' },
+  { slug: 'modelcontextprotocol', name: 'MCP' },
+  { slug: 'deepseek',        name: 'DeepSeek' },
+  { slug: 'openai',          name: 'OpenAI' },
+  { slug: 'googlegemini',    name: 'Gemini AI' },
+  { slug: 'javascript',      name: 'JavaScript' },
+  { slug: 'git',             name: 'Git' },
+  { slug: 'github',          name: 'GitHub' },
+  { slug: 'flutter',         name: 'Flutter' },
+  { slug: 'dart',            name: 'Dart' },
+  { slug: 'angular',         name: 'Angular' },
+  { slug: 'go',              name: 'Go' },
+  { slug: 'n8n',             name: 'n8n' },
+];
+
+function renderMarquee() {
+  const track = document.getElementById('marqueeTrack');
+  if (!track) return;
+
+  const iconUrl = (b) => b.color
+    ? `https://cdn.simpleicons.org/${b.slug}/${b.color}`
+    : `https://cdn.simpleicons.org/${b.slug}`;
+
+  const buildItem = (b) => {
+    const el = document.createElement('span');
+    el.className = 'brand';
+    el.innerHTML = `<img src="${iconUrl(b)}" alt="${b.name}" loading="lazy" onerror="this.style.display='none'"><span>${b.name}</span>`;
+    return el;
+  };
+
+  // Duplica a lista para dar loop infinito visualmente contínuo
+  const items = [...BRANDS, ...BRANDS];
+  items.forEach(b => track.appendChild(buildItem(b)));
+}
+
+renderMarquee();
